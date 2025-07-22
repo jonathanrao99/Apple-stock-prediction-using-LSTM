@@ -28,6 +28,20 @@ import os
 import subprocess
 import time
 
+# Type hints for Pylance
+from typing import TYPE_CHECKING, Optional, Any
+
+if TYPE_CHECKING:
+    import tensorflow as tf
+
+# Import TensorFlow for Pylance resolution (will be caught by try-except if not available)
+try:
+    import tensorflow as tf  # type: ignore
+    TENSORFLOW_AVAILABLE = True
+except ImportError:
+    TENSORFLOW_AVAILABLE = False
+    tf = None  # type: ignore
+
 def print_banner():
     """Print the application banner."""
     banner = """
@@ -70,11 +84,10 @@ def check_dependencies():
         print(f"  ❌ scikit-learn (missing)")
         missing_packages.append('scikit-learn')
     
-    # Check TensorFlow last (to avoid warnings during other checks)
-    try:
-        import tensorflow as tf
+    # Check TensorFlow using pre-imported status
+    if TENSORFLOW_AVAILABLE:
         print(f"  ✅ tensorflow")
-    except ImportError:
+    else:
         print(f"  ❌ tensorflow (missing)")
         missing_packages.append('tensorflow')
     

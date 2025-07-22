@@ -28,6 +28,7 @@ Ever wondered if you could predict the future of Apple's stock price? Well, this
 - **💻 Command Line**: Simple console interface for quick analysis
 - **🔬 Scientific Approach**: Proper train/test splits and evaluation metrics
 - **⚡ Optimized Performance**: Clean, warning-free execution
+- **📊 Real-time Training Progress**: Step-by-step progress tracking during model training
 
 ---
 
@@ -129,7 +130,8 @@ Runs the complete analysis and displays:
 ### 2. **Model Training** 🧠
 - Split data into training (90%) and testing (10%) sets
 - Train LSTM model with 25 epochs
-- Monitor training and validation loss
+- **Real-time progress tracking** with step-by-step updates
+- Monitor training and validation loss with live visualization
 - Optimize hyperparameters for best performance
 
 ### 3. **Prediction & Analysis** 📊
@@ -146,20 +148,41 @@ Runs the complete analysis and displays:
 
 ---
 
-## 🎨 Sample Outputs
+## 🎨 Sample Outputs & Screenshots
 
-### Interactive Charts
-The model generates beautiful interactive charts showing:
-- Historical stock prices
-- Training vs test data splits
-- Actual vs predicted price comparisons
-- Future price predictions
-- Technical indicators
+### 📊 Web Interface Screenshots
 
-### Prediction Accuracy
-- **RMSE**: Low error rates indicating high accuracy
-- **Visual Validation**: Charts showing close alignment between actual and predicted values
-- **Next Day Forecast**: Specific price prediction for the following trading day
+#### Dashboard Overview
+![Dashboard Overview](Dashboard.png)
+*Main application dashboard showing the Apple Stock Predictor interface with configuration sidebar and data analysis view.*
+
+#### Stock Price History
+![Stock Price History](StockPriceHistory.png)
+*Interactive chart displaying Apple stock price history over time with data statistics table.*
+
+#### Technical Indicators
+![Technical Indicators](TechnicalIndicators.png)
+*Technical analysis view showing RSI, MACD, and Moving Averages with interactive charts.*
+
+#### Model Training
+![Model Training](ModelTrain.png)
+*Model training interface with progress tracking, training history visualization, and performance metrics.*
+
+#### Model Training Progress
+![Model Training Progress](Model.png)
+*Real-time training progress with step-by-step updates and completion status.*
+
+#### Predictions
+![Predictions](Predictions.png)
+*Prediction results showing actual vs predicted prices with model performance metrics.*
+
+### Interactive Features
+The web interface provides:
+- **Real-time Training Progress**: Step-by-step progress tracking during model training
+- **Interactive Charts**: Zoom, pan, and explore historical data
+- **Configurable Parameters**: Adjust window size, epochs, and test ratio
+- **Performance Metrics**: Live RMSE, loss, and validation loss tracking
+- **Technical Analysis**: RSI, MACD, and moving averages visualization
 
 ### Console Output Example
 ```
