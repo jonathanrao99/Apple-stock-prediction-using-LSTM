@@ -3,21 +3,59 @@ Streamlit Web Application for Apple Stock Prediction
 A user-friendly web interface for the LSTM stock prediction model.
 """
 
+# Suppress warnings before any other imports
+import os
+import warnings
+
+# Set environment variables for TensorFlow
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress all TensorFlow logging
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'  # Disable oneDNN warnings
+
+# Suppress all warnings
+warnings.filterwarnings('ignore', category=UserWarning)
+warnings.filterwarnings('ignore', category=FutureWarning)
+warnings.filterwarnings('ignore', category=DeprecationWarning)
+warnings.filterwarnings('ignore', message='.*oneDNN.*')
+warnings.filterwarnings('ignore', message='.*protobuf.*')
+warnings.filterwarnings('ignore', message='.*deprecated.*')
+
+# Import config after warning suppression
+import config
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 from datetime import datetime, timedelta
-import tensorflow as tf
-from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
-# Import our custom modules
-from apple_stock_predictor import AppleStockPredictor
-from utils import analyze_stock_data, create_technical_indicators, plot_comprehensive_analysis
-from config import MODEL_CONFIG, DATA_CONFIG
+# Try to import TensorFlow with error handling
+try:
+    import tensorflow as tf
+    TENSORFLOW_AVAILABLE = True
+except ImportError:
+    TENSORFLOW_AVAILABLE = False
+    st.error("❌ TensorFlow is not available. Please install it using: `pip install tensorflow`")
+
+# Try to import sklearn
+try:
+    from sklearn.preprocessing import StandardScaler
+    SKLEARN_AVAILABLE = True
+except ImportError:
+    SKLEARN_AVAILABLE = False
+    st.error("❌ Scikit-learn is not available. Please install it using: `pip install scikit-learn`")
+
+# Import our custom modules with error handling
+try:
+    from apple_stock_predictor import AppleStockPredictor
+    from utils import create_technical_indicators
+    from config import MODEL_CONFIG, DATA_CONFIG
+    CUSTOM_MODULES_AVAILABLE = True
+except ImportError as e:
+    CUSTOM_MODULES_AVAILABLE = False
+    st.error(f"❌ Error importing custom modules: {str(e)}")
 
 # Page configuration
 st.set_page_config(
@@ -53,6 +91,11 @@ st.markdown("""
 
 def main():
     """Main application function."""
+    
+    # Check if all dependencies are available
+    if not all([TENSORFLOW_AVAILABLE, SKLEARN_AVAILABLE, CUSTOM_MODULES_AVAILABLE]):
+        st.error("🚫 Some required dependencies are missing. Please check the error messages above and install the missing packages.")
+        st.stop()
     
     # Header
     st.markdown('<h1 class="main-header">🍎 Apple Stock Predictor</h1>', unsafe_allow_html=True)

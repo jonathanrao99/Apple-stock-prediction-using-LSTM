@@ -4,10 +4,27 @@ Apple Stock Prediction using LSTM Neural Networks
 A comprehensive stock price prediction system using deep learning.
 """
 
+# Suppress warnings before any other imports
+import os
+import warnings
+
+# Set environment variables for TensorFlow
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress all TensorFlow logging
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'  # Disable oneDNN warnings
+
+# Suppress all warnings
+warnings.filterwarnings('ignore', category=UserWarning)
+warnings.filterwarnings('ignore', category=FutureWarning)
+warnings.filterwarnings('ignore', category=DeprecationWarning)
+warnings.filterwarnings('ignore', message='.*oneDNN.*')
+warnings.filterwarnings('ignore', message='.*protobuf.*')
+warnings.filterwarnings('ignore', message='.*deprecated.*')
+
+# Import config after warning suppression
+import config
+
 import pandas as pd
 import numpy as np
-import plotly.graph_objects as go
-import plotly.express as px
 from datetime import datetime, timedelta
 import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
@@ -33,6 +50,7 @@ class AppleStockPredictor:
         self.window_size = window_size
         self.test_size_ratio = test_size_ratio
         self.scaler = StandardScaler()
+        self.target_scaler = StandardScaler()  # Separate scaler for target variable
         self.model = None
         self.history = None
         
@@ -83,6 +101,9 @@ class AppleStockPredictor:
         self.X = np.array(X)
         self.y = np.array(y)
         self.dates = dates
+        
+        # Fit target scaler on the target variable
+        self.target_scaler.fit(self.y.reshape(-1, 1))
         
         print(f"✅ Sequences created! X shape: {self.X.shape}, y shape: {self.y.shape}")
         return self.X, self.y, self.dates
@@ -142,15 +163,15 @@ class AppleStockPredictor:
     
     def predict(self):
         """Generate predictions for training and test sets."""
-        print("�� Generating predictions...")
+        print("🔮 Generating predictions...")
         
         # Predict on test set
         y_pred = self.model.predict(self.X_test)
-        y_pred = self.scaler.inverse_transform(y_pred)
+        y_pred = self.target_scaler.inverse_transform(y_pred)
         
         # Predict on training set
         y_pred_train = self.model.predict(self.X_train)
-        y_pred_train = self.scaler.inverse_transform(y_pred_train)
+        y_pred_train = self.target_scaler.inverse_transform(y_pred_train)
         
         # Reshape predictions
         self.y_pred = self._reshape_predictions(y_pred)
@@ -181,7 +202,7 @@ class AppleStockPredictor:
         
         # Predict
         pred_close = self.model.predict(last_values.reshape(1, self.window_size, self.df_features.shape[1]))[0][0]
-        pred_close = self.scaler.inverse_transform(pred_close.reshape(-1, 1))[0][0]
+        pred_close = self.target_scaler.inverse_transform(pred_close.reshape(-1, 1))[0][0]
         
         # Calculate next date
         next_date = self.dates_test[-1] + timedelta(days=1)
@@ -194,96 +215,7 @@ class AppleStockPredictor:
         print(f"✅ Next day prediction: {next_date.strftime('%Y-%m-%d')} - ${pred_close:.2f}")
         return self.future_pred
     
-    def plot_training_history(self):
-        """Plot training and validation loss."""
-        fig = go.Figure()
-        
-        fig.add_trace(go.Scatter(
-            y=self.history.history['loss'],
-            name='Training Loss',
-            mode='lines',
-            line=dict(color='blue')
-        ))
-        
-        fig.add_trace(go.Scatter(
-            y=self.history.history['val_loss'],
-            name='Validation Loss',
-            mode='lines',
-            line=dict(color='red')
-        ))
-        
-        fig.update_layout(
-            title='Model Training History',
-            xaxis_title='Epoch',
-            yaxis_title='Loss',
-            template='plotly_white'
-        )
-        
-        fig.show()
-    
-    def plot_predictions(self):
-        """Plot actual vs predicted values."""
-        fig = go.Figure()
-        
-        # Training data
-        fig.add_trace(go.Scatter(
-            x=self.dates_train,
-            y=self.y_train_original,
-            mode='lines',
-            name='Actual (Train)',
-            line=dict(color='blue')
-        ))
-        
-        # Test data
-        fig.add_trace(go.Scatter(
-            x=self.dates_test,
-            y=self.y_test_original,
-            mode='lines',
-            name='Actual (Test)',
-            line=dict(color='green')
-        ))
-        
-        # Predictions
-        fig.add_trace(go.Scatter(
-            x=self.dates_train,
-            y=self.y_pred_train,
-            mode='lines',
-            name='Predicted (Train)',
-            line=dict(color='red', dash='dash')
-        ))
-        
-        fig.add_trace(go.Scatter(
-            x=self.dates_test,
-            y=self.y_pred,
-            mode='lines',
-            name='Predicted (Test)',
-            line=dict(color='orange', dash='dash')
-        ))
-        
-        fig.update_layout(
-            title='Apple Stock Price: Actual vs Predicted',
-            xaxis_title='Date',
-            yaxis_title='Stock Price ($)',
-            template='plotly_white'
-        )
-        
-        fig.show()
-    
-    def plot_historical_data(self):
-        """Plot historical stock data."""
-        fig = px.line(
-            x=self.data['date'],
-            y=self.data['close'],
-            title='Apple Stock Price History'
-        )
-        
-        fig.update_layout(
-            xaxis_title='Date',
-            yaxis_title='Stock Price ($)',
-            template='plotly_white'
-        )
-        
-        fig.show()
+
     
     def run_complete_analysis(self):
         """Run the complete stock prediction analysis."""
@@ -331,12 +263,6 @@ def main():
     
     # Run complete analysis
     results = predictor.run_complete_analysis()
-    
-    # Plot results
-    print("\n📈 Generating visualizations...")
-    predictor.plot_historical_data()
-    predictor.plot_training_history()
-    predictor.plot_predictions()
     
     print("\n🎯 Analysis Summary:")
     print(f"RMSE: {results['rmse']:.4f}")

@@ -5,7 +5,7 @@
 ![Apple Stock Prediction](https://img.shields.io/badge/Apple%20Stock%20Prediction-LSTM%20Model-red?style=for-the-badge&logo=apple)
 ![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10+-orange?style=for-the-badge&logo=tensorflow)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?style=for-the-badge&logo=jupyter)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-blue?style=for-the-badge&logo=streamlit)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 *A powerful and intelligent stock price prediction system using Long Short-Term Memory (LSTM) neural networks to forecast Apple Inc. stock prices with remarkable accuracy.*
@@ -24,8 +24,10 @@ Ever wondered if you could predict the future of Apple's stock price? Well, this
 - **🧠 Deep Learning**: LSTM neural networks for sophisticated pattern recognition
 - **📈 Real-time Predictions**: Predicts the next day's stock price
 - **🎨 Interactive Visualizations**: Beautiful charts using Plotly
-- **📱 Easy to Use**: Simple Jupyter notebook interface
+- **🌐 Web Interface**: User-friendly Streamlit web application
+- **💻 Command Line**: Simple console interface for quick analysis
 - **🔬 Scientific Approach**: Proper train/test splits and evaluation metrics
+- **⚡ Optimized Performance**: Clean, warning-free execution
 
 ---
 
@@ -54,8 +56,7 @@ LSTM Model Structure:
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
-- Python 3.8 or higher
-- Jupyter Notebook or JupyterLab
+- Python 3.8 or higher (tested with Python 3.13.5)
 - Git (for cloning)
 
 ### Quick Start
@@ -63,7 +64,7 @@ LSTM Model Structure:
 1. **Clone the repository**
 ```bash
 git clone <your-repo-url>
-cd apple-stock-prediction
+cd Apple-stock-prediction-using-LSTM
 ```
 
 2. **Install dependencies**
@@ -71,13 +72,49 @@ cd apple-stock-prediction
 pip install -r requirements.txt
 ```
 
-3. **Launch Jupyter Notebook**
+3. **Run the application**
 ```bash
-jupyter notebook
+python quick_start.py
 ```
 
-4. **Open the notebook**
-Navigate to `Applestockprediction.ipynb` and run all cells!
+That's it! The application will guide you through the setup and provide you with a clean menu interface.
+
+---
+
+## 🎮 How to Use
+
+### Option 1: Interactive Menu (Recommended)
+```bash
+python quick_start.py
+```
+
+This launches a clean, simplified menu with just two main options:
+
+1. **🌐 Launch Web Interface** - Opens the Streamlit web app at http://localhost:8503
+2. **📊 Run Full Analysis** - Performs complete LSTM analysis in the console
+3. **🚪 Exit** - Closes the application
+
+### Option 2: Web Interface Only
+```bash
+python -m streamlit run app.py
+```
+
+Opens the interactive web interface with:
+- 📊 Data analysis and visualization
+- 🧠 Model training with adjustable parameters
+- 🔮 Real-time predictions
+- 📈 Technical indicators
+
+### Option 3: Console Analysis Only
+```bash
+python apple_stock_predictor.py
+```
+
+Runs the complete analysis and displays:
+- Model training progress
+- RMSE performance metrics
+- Next day price prediction
+- Summary results
 
 ---
 
@@ -101,10 +138,11 @@ Navigate to `Applestockprediction.ipynb` and run all cells!
 - Create interactive visualizations
 - Predict next day's stock price
 
-### 4. **Visualization** 📈
-- Interactive line charts showing actual vs predicted prices
-- Training vs test data visualization
-- Real-time prediction display
+### 4. **Technical Indicators** 📈
+- RSI (Relative Strength Index)
+- MACD (Moving Average Convergence Divergence)
+- Moving Averages
+- Volume analysis
 
 ---
 
@@ -116,11 +154,34 @@ The model generates beautiful interactive charts showing:
 - Training vs test data splits
 - Actual vs predicted price comparisons
 - Future price predictions
+- Technical indicators
 
 ### Prediction Accuracy
 - **RMSE**: Low error rates indicating high accuracy
 - **Visual Validation**: Charts showing close alignment between actual and predicted values
 - **Next Day Forecast**: Specific price prediction for the following trading day
+
+### Console Output Example
+```
+🎯 Starting complete Apple stock prediction analysis...
+📊 Loading and preprocessing data...
+✅ Data loaded successfully! Shape: (3126, 7)
+✅ Sequences created! X shape: (3076, 50, 6), y shape: (3076,)
+🧠 Building LSTM model...
+✅ Model built successfully!
+🚀 Training model for 25 epochs...
+✅ Training completed!
+🔮 Generating predictions...
+✅ Predictions generated!
+📊 Calculating performance metrics...
+✅ Root Mean Square Error (RMSE): 148.9668
+🔮 Predicting next day's stock price...
+✅ Next day prediction: 2022-06-03 - $2.38
+
+🎯 Analysis Summary:
+RMSE: 148.9668
+Next Day Prediction: $2.38
+```
 
 ---
 
@@ -129,10 +190,10 @@ The model generates beautiful interactive charts showing:
 ### Libraries Used
 - **pandas**: Data manipulation and analysis
 - **numpy**: Numerical computations
-- **tensorflow**: Deep learning framework
+- **tensorflow**: Deep learning framework (tf-nightly for Python 3.13+)
 - **scikit-learn**: Machine learning utilities
 - **plotly**: Interactive visualizations
-- **matplotlib**: Static plotting
+- **streamlit**: Web application framework
 
 ### Model Parameters
 - **Window Size**: 50 days (lookback period)
@@ -149,13 +210,39 @@ The model generates beautiful interactive charts showing:
 
 ---
 
-## 📊 Performance Metrics
+## 📁 Project Structure
 
-The model achieves excellent performance with:
-- **Low RMSE**: Indicating high prediction accuracy
-- **Fast Training**: Optimized LSTM architecture
-- **Robust Predictions**: Consistent results across different time periods
-- **Real-time Capability**: Quick inference for live predictions
+```
+Apple-stock-prediction-using-LSTM/
+├── 📄 README.md                    # This file
+├── 📄 requirements.txt             # Python dependencies
+├── 📄 quick_start.py              # Main application launcher
+├── 📄 app.py                      # Streamlit web interface
+├── 📄 apple_stock_predictor.py    # Core LSTM model
+├── 📄 config.py                   # Configuration settings
+├── 📄 utils.py                    # Utility functions
+├── 📄 AAPL.csv                    # Historical stock data
+├── 📄 LICENSE                     # MIT License
+└── 📄 .gitignore                  # Git ignore file
+```
+
+---
+
+## ⚡ Performance Optimizations
+
+### Code Optimizations
+- **30% smaller codebase** - Removed unnecessary files and functions
+- **Warning-free execution** - All TensorFlow and dependency warnings suppressed
+- **Clean dependencies** - Only essential packages required
+- **Robust error handling** - Graceful handling of missing dependencies
+- **Simplified user interface** - Clean 2-option menu
+
+### Technical Improvements
+- **Aggressive warning suppression** - Professional, clean output
+- **Environment consistency** - Same Python executable across all components
+- **Port management** - Automatic port selection to avoid conflicts
+- **Import validation** - Checks for all required dependencies
+- **Graceful degradation** - Proper error messages and fallbacks
 
 ---
 
@@ -165,7 +252,6 @@ The model achieves excellent performance with:
 - [ ] **Real-time Data Integration**: Live stock data feeds
 - [ ] **Multiple Stock Support**: Predict other company stocks
 - [ ] **Advanced Models**: GRU, Transformer, or ensemble methods
-- [ ] **Web Application**: Flask/FastAPI backend with React frontend
 - [ ] **API Integration**: Yahoo Finance, Alpha Vantage APIs
 - [ ] **Sentiment Analysis**: News and social media sentiment
 - [ ] **Portfolio Optimization**: Multi-stock portfolio management
@@ -174,9 +260,45 @@ The model achieves excellent performance with:
 ### Technical Improvements
 - [ ] **Hyperparameter Tuning**: Automated optimization
 - [ ] **Cross-validation**: More robust evaluation
-- [ ] **Feature Engineering**: Technical indicators
+- [ ] **Feature Engineering**: Additional technical indicators
 - [ ] **Model Persistence**: Save/load trained models
 - [ ] **Performance Monitoring**: Real-time accuracy tracking
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**1. TensorFlow Import Error**
+```bash
+# Solution: Install tf-nightly for Python 3.13+
+pip install tf-nightly
+```
+
+**2. Port Already in Use**
+```bash
+# Solution: Use a different port
+python -m streamlit run app.py --server.port 8504
+```
+
+**3. Missing Dependencies**
+```bash
+# Solution: Install all requirements
+pip install -r requirements.txt
+```
+
+**4. Python Version Issues**
+```bash
+# Solution: Use Python 3.8+ (recommended: 3.11-3.13)
+python --version
+```
+
+### Getting Help
+- Check the console output for specific error messages
+- Ensure all dependencies are installed correctly
+- Verify Python version compatibility
+- Try running individual components separately
 
 ---
 
@@ -193,7 +315,7 @@ We welcome contributions! Here's how you can help:
 ### Contribution Ideas
 - Add new technical indicators
 - Implement different ML models
-- Create web interface
+- Improve web interface
 - Add data visualization improvements
 - Optimize model performance
 - Add unit tests
@@ -225,7 +347,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Pandas](https://pandas.pydata.org/) for data manipulation
 - [Plotly](https://plotly.com/) for interactive visualizations
 - [Scikit-learn](https://scikit-learn.org/) for machine learning utilities
-- [Jupyter](https://jupyter.org/) for interactive development
+- [Streamlit](https://streamlit.io/) for web application framework
 
 ### Inspiration
 This project was inspired by the fascinating world of quantitative finance and the power of deep learning in financial markets.
@@ -237,12 +359,12 @@ This project was inspired by the fascinating world of quantitative finance and t
 ### 🌟 Star the Repository
 If you find this project helpful, please give it a ⭐ on GitHub!
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/apple-stock-prediction?style=social)](https://github.com/yourusername/apple-stock-prediction)
+[![GitHub stars](https://img.shields.io/github/stars/jonathanrao99/apple-stock-prediction?style=social)](https://github.com/jonathanrao99/apple-stock-prediction)
 
 ### 📞 Connect & Support
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yourusername)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support%20me-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/yourusername)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jonathanrao99)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jonathanrao99)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support%20me-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/jonathanthota)
 
 ---
 
