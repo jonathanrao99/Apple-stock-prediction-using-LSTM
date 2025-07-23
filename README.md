@@ -4,6 +4,10 @@
 
 A lightning-fast LSTM neural network that predicts Apple stock prices with real-time training progress and a sleek web interface.
 
+## 🌐 Live Demo
+
+**[🚀 Try it now!](https://applestocklstm.streamlit.app/)**
+
 ## 🚀 Quick Start
 
 ```bash
@@ -16,40 +20,27 @@ pip install -r requirements.txt
 python quick_start.py
 ```
 
-## ☁️ Streamlit Cloud Deployment
-
-This app is ready for Streamlit Cloud! Just connect your GitHub repo and deploy:
-
-1. **Fork/Clone** this repository
-2. **Connect** to Streamlit Cloud
-3. **Deploy** - it will automatically use tf-nightly (compatible with Python 3.13)
-
 ## 🎯 What's Cool About This?
 
-- **🤖 Smart AI**: LSTM neural network with 40+ years of Apple data (1980-2022)
-- **⚡ Optimized Training**: Early stopping, learning rate scheduling, dropout regularization
-- **🌐 Web Interface**: Beautiful Streamlit dashboard with real-time progress
+- **🤖 Smart AI**: LSTM neural network with 40+ years of Apple data
+- **⚡ Optimized Training**: Early stopping, learning rate scheduling, dropout
+- **🌐 Live Web App**: Beautiful Streamlit dashboard with real-time progress
 - **📊 10,468 Data Points**: Massive dataset for better predictions
 - **🎨 Interactive Charts**: Plotly-powered visualizations
 - **⚙️ Zero Warnings**: Clean, optimized codebase
 
 ## 🎮 How to Use
 
-### Option 1: Interactive Menu
-```bash
-python quick_start.py
-# Choose: Web Interface (1) or Full Analysis (2)
-```
+### 🌐 Live Web App
+**[🚀 Try it now!](https://applestocklstm.streamlit.app/)**
 
-### Option 2: Web Interface Only
+### 💻 Local Setup
 ```bash
-streamlit run app.py
-# Open: http://localhost:8501
-```
-
-### Option 3: Console Analysis
-```bash
-python apple_stock_predictor.py
+python quick_start.py  # Interactive menu
+# OR
+streamlit run app.py   # Web interface only
+# OR  
+python apple_stock_predictor.py  # Console analysis
 ```
 
 ## 🏗️ Architecture
@@ -70,11 +61,9 @@ python apple_stock_predictor.py
 
 ## 🛠️ Tech Stack
 
-- **Python 3.13** + **TensorFlow nightly** (latest)
-- **Streamlit** for web interface
-- **Plotly** for interactive charts
-- **Pandas** + **NumPy** for data processing
-- **Scikit-learn** for scaling & metrics
+- **Python 3.13** + **TensorFlow nightly**
+- **Streamlit** + **Plotly** for web interface
+- **Pandas** + **NumPy** + **Scikit-learn**
 
 ## 📈 Sample Output
 
@@ -85,19 +74,18 @@ Next Day Prediction: $151.21
 Training Time: ~15 minutes
 ```
 
-## 🔧 Troubleshooting
+## 🔧 Quick Fixes
 
-| Issue | Solution |
-|-------|----------|
-| TensorFlow Import Error | `pip install tf-nightly` |
-| Streamlit Cloud Error | Use tf-nightly (compatible with Python 3.13) |
-| Port Already in Use | Change port in `app.py` |
-| Missing Dependencies | `pip install -r requirements.txt` |
+| Issue | Fix |
+|-------|-----|
+| TensorFlow Error | `pip install tf-nightly` |
+| Port in Use | Change port in `app.py` |
+| Missing Deps | `pip install -r requirements.txt` |
 
 ## 📊 Performance
 
-- **Data Points**: 10,468 (vs 3,126 before)
-- **Training Time**: ~15 minutes (optimized)
+- **Data Points**: 10,468
+- **Training Time**: ~15 minutes
 - **Model Size**: 1.25M parameters
 - **Accuracy**: RMSE ~$103
 
