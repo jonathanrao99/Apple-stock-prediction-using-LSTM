@@ -1,4 +1,4 @@
-# 🍎 Apple Stock Predictor
+# 🍎 Apple Stock Predicton using LSTM
 
 <div align="center">
 
