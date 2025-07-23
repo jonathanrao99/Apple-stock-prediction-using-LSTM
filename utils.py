@@ -18,6 +18,9 @@ warnings.filterwarnings('ignore', category=DeprecationWarning)
 warnings.filterwarnings('ignore', message='.*oneDNN.*')
 warnings.filterwarnings('ignore', message='.*protobuf.*')
 warnings.filterwarnings('ignore', message='.*deprecated.*')
+warnings.filterwarnings('ignore', message='.*tensorflow.*')
+warnings.filterwarnings('ignore', message='.*keras.*')
+warnings.filterwarnings('ignore', message='.*reset_default_graph.*')
 
 # Import config after warning suppression
 import config

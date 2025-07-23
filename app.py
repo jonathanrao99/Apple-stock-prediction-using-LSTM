@@ -18,6 +18,9 @@ warnings.filterwarnings('ignore', category=DeprecationWarning)
 warnings.filterwarnings('ignore', message='.*oneDNN.*')
 warnings.filterwarnings('ignore', message='.*protobuf.*')
 warnings.filterwarnings('ignore', message='.*deprecated.*')
+warnings.filterwarnings('ignore', message='.*tensorflow.*')
+warnings.filterwarnings('ignore', message='.*keras.*')
+warnings.filterwarnings('ignore', message='.*reset_default_graph.*')
 
 # Import config after warning suppression
 import config
@@ -160,7 +163,10 @@ def main():
             
             # Data statistics
             st.subheader("📋 Data Statistics")
-            st.dataframe(data.describe())
+            # Convert date to string to avoid Arrow serialization issues
+            data_display = data.copy()
+            data_display['Date'] = data_display['Date'].astype(str)
+            st.dataframe(data_display.describe())
             
         except Exception as e:
             st.error(f"❌ Error loading data: {str(e)}")

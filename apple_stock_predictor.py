@@ -11,6 +11,7 @@ import warnings
 # Set environment variables for TensorFlow
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress all TensorFlow logging
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'  # Disable oneDNN warnings
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'  # Prevent GPU memory issues
 
 # Suppress all warnings
 warnings.filterwarnings('ignore', category=UserWarning)
@@ -19,6 +20,8 @@ warnings.filterwarnings('ignore', category=DeprecationWarning)
 warnings.filterwarnings('ignore', message='.*oneDNN.*')
 warnings.filterwarnings('ignore', message='.*protobuf.*')
 warnings.filterwarnings('ignore', message='.*deprecated.*')
+warnings.filterwarnings('ignore', message='.*tensorflow.*')
+warnings.filterwarnings('ignore', message='.*keras.*')
 
 # Import config after warning suppression
 import config
@@ -138,30 +141,68 @@ class AppleStockPredictor:
         """Build and compile the LSTM model."""
         print("🧠 Building LSTM model...")
         
+        # Add dropout for regularization
         self.model = tf.keras.Sequential([
-            tf.keras.layers.LSTM(500, return_sequences=True, input_shape=(self.window_size, self.df_features.shape[1])),
-            tf.keras.layers.LSTM(100),
+            tf.keras.layers.LSTM(500, return_sequences=True, input_shape=(self.window_size, self.df_features.shape[1]), dropout=0.2),
+            tf.keras.layers.LSTM(100, dropout=0.2),
             tf.keras.layers.Dense(1)
         ])
         
-        self.model.compile(loss='mean_squared_error', optimizer='adam')
+        # Use Adam optimizer with learning rate scheduling
+        optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+        self.model.compile(loss='mean_squared_error', optimizer=optimizer)
         
         print("✅ Model built successfully!")
         self.model.summary()
         return self.model
     
     def train_model(self, epochs=25, verbose=1):
-        """Train the LSTM model."""
+        """Train the LSTM model with early stopping and learning rate scheduling."""
         print(f"🚀 Training model for {epochs} epochs...")
+        
+        # Early stopping callback
+        early_stopping = tf.keras.callbacks.EarlyStopping(
+            monitor='val_loss',
+            patience=5,
+            restore_best_weights=True,
+            verbose=0
+        )
+        
+        # Learning rate scheduler
+        lr_scheduler = tf.keras.callbacks.ReduceLROnPlateau(
+            monitor='val_loss',
+            factor=0.5,
+            patience=3,
+            min_lr=1e-6,
+            verbose=0
+        )
+        
+        # Model checkpoint
+        checkpoint = tf.keras.callbacks.ModelCheckpoint(
+            'best_model.h5',
+            monitor='val_loss',
+            save_best_only=True,
+            verbose=0
+        )
         
         self.history = self.model.fit(
             self.X_train, self.y_train,
             validation_data=(self.X_test, self.y_test),
             epochs=epochs,
+            batch_size=32,
+            callbacks=[early_stopping, lr_scheduler, checkpoint],
             verbose=verbose
         )
         
         print("✅ Training completed!")
+        
+        # Clean up checkpoint file
+        try:
+            if os.path.exists('best_model.h5'):
+                os.remove('best_model.h5')
+        except:
+            pass
+            
         return self.history
     
     def predict(self):

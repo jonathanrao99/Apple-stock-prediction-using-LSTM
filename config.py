@@ -20,6 +20,8 @@ warnings.filterwarnings('ignore', message='.*deprecated.*')
 warnings.filterwarnings('ignore', message='.*will be removed.*')
 warnings.filterwarnings('ignore', message='.*tensorflow.*')
 warnings.filterwarnings('ignore', message='.*google.*')
+warnings.filterwarnings('ignore', message='.*keras.*')
+warnings.filterwarnings('ignore', message='.*reset_default_graph.*')
 
 # Data Configuration
 DATA_CONFIG = {
