@@ -61,6 +61,9 @@ class AppleStockPredictor:
         # Load data
         self.data = pd.read_csv(self.data_path, parse_dates=['Date'])
         
+        # Store original date column for later use
+        self.original_dates = self.data['Date'].copy()
+        
         # Prepare features
         self.data['date'] = self.data['Date']
         self.data['close'] = self.data['Close']

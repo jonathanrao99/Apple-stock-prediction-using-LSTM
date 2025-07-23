@@ -122,7 +122,7 @@ Runs the complete analysis and displays:
 ## 📈 How It Works
 
 ### 1. **Data Preprocessing** 🔧
-- Load historical Apple stock data (2010-2024)
+- Load historical Apple stock data (1980-2022)
 - Clean and prepare the dataset
 - Apply StandardScaler for feature normalization
 - Create time-series sequences with 50-day windows
@@ -188,8 +188,8 @@ The web interface provides:
 ```
 🎯 Starting complete Apple stock prediction analysis...
 📊 Loading and preprocessing data...
-✅ Data loaded successfully! Shape: (3126, 7)
-✅ Sequences created! X shape: (3076, 50, 6), y shape: (3076,)
+✅ Data loaded successfully! Shape: (10468, 7)
+✅ Sequences created! X shape: (10418, 50, 6), y shape: (10418,)
 🧠 Building LSTM model...
 ✅ Model built successfully!
 🚀 Training model for 25 epochs...
@@ -199,11 +199,11 @@ The web interface provides:
 📊 Calculating performance metrics...
 ✅ Root Mean Square Error (RMSE): 148.9668
 🔮 Predicting next day's stock price...
-✅ Next day prediction: 2022-06-03 - $2.38
+✅ Next day prediction: 2022-06-17 - $151.21
 
 🎯 Analysis Summary:
 RMSE: 148.9668
-Next Day Prediction: $2.38
+Next Day Prediction: $151.21
 ```
 
 ---
@@ -269,23 +269,7 @@ Apple-stock-prediction-using-LSTM/
 
 ---
 
-## 🚀 Future Enhancements
 
-### Planned Features
-- [ ] **Real-time Data Integration**: Live stock data feeds
-- [ ] **Multiple Stock Support**: Predict other company stocks
-- [ ] **Advanced Models**: GRU, Transformer, or ensemble methods
-- [ ] **API Integration**: Yahoo Finance, Alpha Vantage APIs
-- [ ] **Sentiment Analysis**: News and social media sentiment
-- [ ] **Portfolio Optimization**: Multi-stock portfolio management
-- [ ] **Alert System**: Price movement notifications
-
-### Technical Improvements
-- [ ] **Hyperparameter Tuning**: Automated optimization
-- [ ] **Cross-validation**: More robust evaluation
-- [ ] **Feature Engineering**: Additional technical indicators
-- [ ] **Model Persistence**: Save/load trained models
-- [ ] **Performance Monitoring**: Real-time accuracy tracking
 
 ---
 
@@ -382,7 +366,7 @@ This project was inspired by the fascinating world of quantitative finance and t
 ### 🌟 Star the Repository
 If you find this project helpful, please give it a ⭐ on GitHub!
 
-[![GitHub stars](https://img.shields.io/github/stars/jonathanrao99/apple-stock-prediction?style=social)](https://github.com/jonathanrao99/apple-stock-prediction)
+[![GitHub stars](https://img.shields.io/github/stars/jonathanrao99/Apple-stock-prediction-using-LSTM?style=social)](https://github.com/jonathanrao99/Apple-stock-prediction-using-LSTM)
 
 ### 📞 Connect & Support
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jonathanrao99)
@@ -391,7 +375,7 @@ If you find this project helpful, please give it a ⭐ on GitHub!
 
 ---
 
-**Made with ❤️ and ☕ by [Your Name]**
+**Made with ❤️ and ☕ by Jonathan Thota**
 
 *Predicting the future, one stock at a time! 📈*
 
