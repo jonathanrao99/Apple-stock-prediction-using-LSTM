@@ -4,8 +4,7 @@
 
 ### Step 1: Prepare Your Repository
 ✅ This repository is already configured for Streamlit Cloud deployment with:
-- `runtime.txt` - Specifies Python 3.10
-- `requirements.txt` - Uses TensorFlow 2.13.0 (compatible with Python 3.10)
+- `requirements.txt` - Uses tf-nightly (compatible with Python 3.13)
 - `.streamlit/config.toml` - Optimized configuration
 
 ### Step 2: Deploy to Streamlit Cloud
@@ -24,23 +23,18 @@
 
 ## 🔧 Configuration Files
 
-### runtime.txt
-```
-python-3.10
-```
-- Tells Streamlit Cloud to use Python 3.10
-- Ensures TensorFlow compatibility
+
 
 ### requirements.txt
 ```
 pandas>=1.5.0
 numpy>=1.21.0
-tensorflow==2.13.0
+tf-nightly
 scikit-learn>=1.1.0
 plotly>=5.10.0
 streamlit>=1.28.0
 ```
-- Uses TensorFlow 2.13.0 (stable with Python 3.10)
+- Uses tf-nightly (compatible with Python 3.13)
 - All other dependencies are compatible
 
 ### .streamlit/config.toml
@@ -66,7 +60,7 @@ textColor = "#262730"
 **Solution**: The `runtime.txt` and `requirements.txt` files should fix this automatically.
 
 ### Issue: "Python version incompatible"
-**Solution**: The `runtime.txt` file specifies Python 3.10, which is compatible with TensorFlow 2.13.0.
+**Solution**: Using tf-nightly which is compatible with Python 3.13.
 
 ### Issue: "App takes too long to load"
 **Solution**: This is normal for the first load. The model needs to download and train.

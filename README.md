@@ -22,7 +22,7 @@ This app is ready for Streamlit Cloud! Just connect your GitHub repo and deploy:
 
 1. **Fork/Clone** this repository
 2. **Connect** to Streamlit Cloud
-3. **Deploy** - it will automatically use Python 3.10 and TensorFlow 2.13.0
+3. **Deploy** - it will automatically use tf-nightly (compatible with Python 3.13)
 
 ## 🎯 What's Cool About This?
 
@@ -70,7 +70,7 @@ python apple_stock_predictor.py
 
 ## 🛠️ Tech Stack
 
-- **Python 3.13** + **TensorFlow 2.21** (nightly)
+- **Python 3.13** + **TensorFlow nightly** (latest)
 - **Streamlit** for web interface
 - **Plotly** for interactive charts
 - **Pandas** + **NumPy** for data processing
@@ -90,7 +90,7 @@ Training Time: ~15 minutes
 | Issue | Solution |
 |-------|----------|
 | TensorFlow Import Error | `pip install tf-nightly` |
-| Streamlit Cloud Error | Use Python 3.10 (runtime.txt included) |
+| Streamlit Cloud Error | Use tf-nightly (compatible with Python 3.13) |
 | Port Already in Use | Change port in `app.py` |
 | Missing Dependencies | `pip install -r requirements.txt` |
 
